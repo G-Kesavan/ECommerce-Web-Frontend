@@ -7,6 +7,7 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import ProductDetials from './Components/Products/ProductDetails'
 import { ToastContainer } from 'react-toastify'
+import SearchProduct from './Components/Products/SearchProduct'
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/product/:id' element={<ProductDetials/>}/>
+          <Route path='/search/:keyword' element={<SearchProduct/>}/>
         </Routes>
         <Footer/>
       </HelmetProvider>

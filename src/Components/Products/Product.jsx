@@ -8,6 +8,7 @@ const Product = ({product}) => {
             <img
                 className="card-img-top mx-auto"
                 src={product.images[0].image}
+                alt={product.name}
             />
             <div className="card-body d-flex flex-column">
                 <h5 className="card-title">
@@ -19,7 +20,7 @@ const Product = ({product}) => {
                     </div>
                     <span id="no_of_reviews">({product.numOfReviews} Reviews)</span>
                 </div>
-                <p className="card-text">${product.price}</p>
+                <p className="card-text">₹{product.price}</p>
                 <Link to={`/product/${product._id}`} id="view_btn" className="btn btn-block">View Details</Link>
             </div>
         </div>

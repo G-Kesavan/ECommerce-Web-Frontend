@@ -4,22 +4,24 @@ import { getProduct } from '../../actions/productAction'
 import { useParams } from 'react-router-dom'
 import Loader from '../Layout/Loader'
 import { Carousel } from 'react-bootstrap'
+import MetaData from '../Layout/MetaData'
 
 const ProductDetials = () => {
     const dispatch = useDispatch()
     const {id} = useParams()
     const {product,loading} = useSelector((state) => state.productState)
     useEffect(()=>{
-        dispatch(getProduct(id))
-    },[])
+        dispatch(getProduct(id))  
+    },[dispatch,id])
   return (
     <>{
         loading?<Loader/>
         :<>
+            <MetaData title={product.name}/>
             <div className="container container-fluid">
                 <div className="row f-flex justify-content-around">
                     <div className="col-12 col-lg-5 img-fluid" id="product_image">
-                        <Carousel >
+                        <Carousel prevLabel="" nextLabel="">
                            {product.images && product.images.map((image)=>(
                                 <Carousel.Item key={image._id}>
                                     <img src={image.image} alt={product.name} height="500" width="500"/>
@@ -41,7 +43,7 @@ const ProductDetials = () => {
 
                         <hr/>
 
-                        <p id="product_price">${product.price}</p>
+                        <p id="product_price">₹{product.price}</p>
                         <div className="stockCounter d-inline">
                             <span className="btn btn-danger minus">-</span>
 
