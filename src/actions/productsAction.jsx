@@ -1,18 +1,45 @@
-import axios from "axios"
-import {productsFail, productsRequest, productSuccess} from '../slices/productsSlices'
+import axios from "axios";
+import {
+  productsFail,
+  productsRequest,
+  productsSuccess,
+} from "../slices/productsSlices";
+import {
+  productFail,
+  productRequest,
+  productSuccess,
+} from "../slices/productSlices";
 
-export const getProducts = (currentPage, keyword) => async (dispatch) =>{
-    try{
-        dispatch(productsRequest())
-        if(keyword){
-            const {data} = await axios.get('/api/products/get-products?page='+currentPage+'&keyword='+keyword)
-            dispatch(productSuccess(data))
-        }else{
-            const {data} = await axios.get('/api/products/get-products?page='+currentPage)
-            dispatch(productSuccess(data))
-        }
+export const getProducts =
+  (currentPage, keyword, price, category, rating) => async (dispatch) => {
+    try {
+      dispatch(productsRequest());
+      let url = "/api/products/get-products?page=" + currentPage;
+      if (keyword) {
+        url += `&keyword=${keyword}`;
+      }
+      if (price) {
+        url += `&price[gte]=${price[0]}&price[lte]=${price[1]}`;
+      }
+      if (category) {
+        url += `&category=${category}`;
+      }
+      if (rating) {
+        url += `&ratings[gte]=${rating}`;
+      }
+      const { data } = await axios.get(url);
+      dispatch(productsSuccess(data));
+    } catch (error) {
+      dispatch(productsFail(error.response.data.message));
     }
-    catch(error){
-        dispatch(productsFail(error.response.data.message))
-    }
-}
+  };
+
+export const getProduct = (id) => async (dispatch) => {
+  try {
+    dispatch(productRequest());
+    const { data } = await axios.get(`/api/products/product/${id}`);
+    dispatch(productSuccess(data));
+  } catch (error) {
+    dispatch(productFail(error.response.data.message));
+  }
+};
