@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   decreasItemQuantity,
   deleteItem,
@@ -9,8 +9,13 @@ import {
 import { Fragment } from "react";
 
 const Cart = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const { items: cartItems } = useSelector((state) => state.cartState);
+
+  const checkOutFun = () => {
+    navigate('/login?redirect=shipping-details')
+  }
   return (
     <>
       {cartItems.length === 0 ? (
@@ -120,7 +125,7 @@ const Cart = () => {
                 </p>
 
                 <hr />
-                <button id="checkout_btn" className="btn btn-primary btn-block">
+                <button id="checkout_btn" className="btn btn-primary btn-block" onClick={checkOutFun}>
                   Check out
                 </button>
               </div>

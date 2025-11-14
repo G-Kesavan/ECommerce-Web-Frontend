@@ -1,25 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { login } from "../../actions/userAction";
 import MetaData from "../../utils/MetaData";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const location = useLocation()
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading, isAuthenticated } = useSelector((state) => state.authState);
+  const redirect = location.search?'/'+location.search.split('=')[1]:'/'
   const handlSubmit = (e) => {
     e.preventDefault();
     dispatch(login(email, password));
   };
 
   useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/");
+    if(isAuthenticated === false && redirect === '/shipping-details'){
+      toast.warning('Pleace login after access checkout page...',{position:'bottom-center'})
     }
-  }, [isAuthenticated, navigate]);
+    if (isAuthenticated) {
+      navigate(redirect);
+    }
+  }, [isAuthenticated, navigate,redirect]);
   return (
     <div className="container container-fluid">
       <MetaData title={"Login page"} />

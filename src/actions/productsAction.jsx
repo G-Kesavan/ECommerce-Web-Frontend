@@ -5,6 +5,10 @@ import {
   productsSuccess,
 } from "../slices/productsSlices";
 import {
+  clearMessage,
+  createReviweFail,
+  createReviweRequest,
+  createReviweSuccess,
   productFail,
   productRequest,
   productSuccess,
@@ -42,4 +46,23 @@ export const getProduct = (id) => async (dispatch) => {
   } catch (error) {
     dispatch(productFail(error.response.data.message));
   }
+};
+
+export const createReviwe =
+  (productId, rating, comment) => async (dispatch) => {
+    try {
+      dispatch(createReviweRequest());
+      const { data } = await axios.put(`/api/products/review`, {
+        productId,
+        rating,
+        comment,
+      });
+      dispatch(createReviweSuccess(data));
+    } catch (error) {
+      dispatch(createReviweFail(error.response.data.message));
+    }
+  };
+
+export const clearProductMessage = () => async (dispatch) => {
+  dispatch(clearMessage());
 };

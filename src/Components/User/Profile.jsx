@@ -11,7 +11,7 @@ const Profile = () => {
       <MetaData title={"My Profile"} />
       <h2 className="mt-5 ml-5">My Profile</h2>
       <div className="row justify-content-around mt-5 user-info">
-        <div className="col-12 col-md-3">
+        <div className="col-12 col-md-3 grid place-items-center">
           <figure className="avatar avatar-profile">
             <img
               className="rounded-circle img-fluid"
@@ -20,7 +20,7 @@ const Profile = () => {
             />
           </figure>
           <Link
-            to={"/edit-profile"}
+            to={"/update-profile"}
             id="edit_profile"
             className="btn btn-primary btn-block my-5"
           >
@@ -38,9 +38,9 @@ const Profile = () => {
           <h4>Email Address</h4>
           <p>{user.email}</p>
 
-          <a href="#" className="btn btn-danger btn-block mt-5">
+          <Link to={'/my-order'} className="btn btn-danger btn-block mt-5">
             My Orders
-          </a>
+          </Link>
 
           <Link
             to={"/change-password"}

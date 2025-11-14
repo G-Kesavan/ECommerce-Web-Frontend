@@ -22,27 +22,37 @@ import {
 import ChangePassword from "./Components/User/ChangePassword";
 import ForgotPassword from "./Components/User/ForgotPassword";
 import ResetPassword from "./Components/User/ResetPassword";
-import Cart from "./Components/Products/Cart";
+import Cart from "./Components/Cart/Cart";
+import Shipping from "./Components/Cart/Shipping";
+import ConfirmOrder from "./Components/Cart/ConfirmOrder";
+import PaymentSuccess from "./Components/Cart/PaymentSuccess";
+import OrderDetails from "./Components/Order/OrderDetails";
+import MyOrder from "./Components/Order/MyOrder";
+import { clearProductMessage } from "./actions/productsAction";
 
 const App = () => {
   const dispatch = useDispatch();
   const { error, message } = useSelector((state) => state.authState);
+  const { error: productError, message: productMessage } = useSelector(
+    (state) => state.productState
+  );
 
   useEffect(() => {
     dispatch(loadUserData());
+  }, [dispatch]);
 
-    if (error) {
-      toast.dismiss();
-      toast.error(error, { position: "bottom-center" });
+  useEffect(() => {
+    if (error || productError) {
+      toast.error(error || productError, { position: "bottom-center" });
       dispatch(clearAuthError());
     }
 
-    if (message) {
-      toast.dismiss();
-      toast.success(message, { position: "bottom-center" });
+    if (message || productMessage) {
+      toast.success(message || productMessage, { position: "bottom-center" });
+      if (productError) dispatch(clearProductMessage());
       dispatch(clearAuthMessage());
     }
-  }, [dispatch, message, error]);
+  }, [dispatch, message, error, productMessage, productError]);
 
   return (
     <Router>
@@ -68,10 +78,50 @@ const App = () => {
               }
             />
             <Route
-              path="/edit-profile"
+              path="/update-profile"
               element={
                 <ProtectedRoute>
                   <UpdateProfile />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/shipping-details"
+              element={
+                <ProtectedRoute>
+                  <Shipping />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/confirm-order"
+              element={
+                <ProtectedRoute>
+                  <ConfirmOrder />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/payment-success"
+              element={
+                <ProtectedRoute>
+                  <PaymentSuccess />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/my-order"
+              element={
+                <ProtectedRoute>
+                  <MyOrder />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/order-details/:orderId"
+              element={
+                <ProtectedRoute>
+                  <OrderDetails />
                 </ProtectedRoute>
               }
             />

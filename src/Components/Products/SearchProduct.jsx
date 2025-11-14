@@ -69,7 +69,7 @@ const SearchProduct = () => {
       {loading ? (
         <Loader />
       ) : (
-        <div className="container container-fluid">
+        <>
           <MetaData title={"Search Product"} />
           <h1 id="products_heading" className="ml-3 mr-3">
             Search Products
@@ -150,7 +150,7 @@ const SearchProduct = () => {
               />
             </div>
           ) : null}
-        </div>
+        </>
       )}
     </>
   );

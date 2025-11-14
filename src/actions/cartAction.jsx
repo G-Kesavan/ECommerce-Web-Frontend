@@ -4,8 +4,10 @@ import {
   addCartItemRequest,
   addCartItemSuccess,
   decreaseQuantity,
+  deleteCartAllItem,
   deleteCartItem,
   increaseQuantity,
+  saveShippingInfo,
 } from "../slices/cartSlices";
 
 export const addCartItems = (id, quantity) => async (dispatch) => {
@@ -15,6 +17,7 @@ export const addCartItems = (id, quantity) => async (dispatch) => {
     dispatch(
       addCartItemSuccess({
         _id: data.product._id,
+        product: data.product._id,
         image: data.product.images[0].image,
         name: data.product.name,
         price: data.product.price,
@@ -54,3 +57,14 @@ export const deleteItem = (id) => async (dispatch) => {
     })
   );
 };
+
+export const deleteAllItem = () => async (dispatch) => {
+  dispatch(deleteCartAllItem());
+};
+
+export const saveShippingInformation =
+  (address, city, state, postCode, country, phonNo) => async (dispatch) => {
+    dispatch(
+      saveShippingInfo({ address, city, state, postCode, country, phonNo })
+    );
+  };

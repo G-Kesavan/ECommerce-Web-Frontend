@@ -28,16 +28,16 @@ const Header = () => {
         </div>
       </div>
 
-      <div className="col-12 col-md-6 mt-2 mt-md-0">
+      <div className="col-12 col-md-5 mt-2 mt-md-0">
         <SearchBar />
       </div>
 
-      <div className="col-12 col-md-3 mt-4 mt-md-0 text-center items-center justify-center flex">
+      <div className="col-12 col-md-4 mt-4 mt-md-0 text-center items-center justify-center flex">
         {!isAuthenticated ? (
           <Button sx={{ bgcolor: "#fa9c23", fontWeight: "500" }}>
             <Link
               className="text-white"
-              style={{ textDecoration: "none" }}
+              style={{ textDecoration: "none",padding:"6px 10px" }}
               to={`/login`}
             >
               login
@@ -55,7 +55,13 @@ const Header = () => {
                 }}
               >
                 <Avatar src={user.avatar} alt={user.name} />
-                <Typography sx={{ fontWeight: "500", lineHeight: "100%" }}>
+                <Typography
+                  sx={{
+                    fontWeight: "500",
+                    lineHeight: "100%",
+                    textWrap: "nowrap",
+                  }}
+                >
                   {user.name.slice(0, 9)}
                 </Typography>
               </MenuButton>
@@ -85,13 +91,14 @@ const Header = () => {
         <Link
           to={"/cart"}
           style={{ textDecoration: "none" }}
-          className="justify-center items-center flex flex-col m-1 ml-2"
+          className="flex flex-col text-nowrap ml-3 hover:border-white border-2 border-amber-500 rounded-md place-items-center p-[5px_10px]"
         >
-          <span className="m-1 items-center flex justify-center text-orange-300 leading-0">
-            {cartItem.length}
-          </span>
-          <span className="m-0">
-            <TiShoppingCart fontSize={30} className="text-orange-300" />
+          <TiShoppingCart
+            className="hover:text-white text-orange-300 leading-0"
+            size={22}
+          />
+          <span className="leading-[100%] hover:text-white text-orange-300">
+            Cart {cartItem.length}
           </span>
         </Link>
       </div>
