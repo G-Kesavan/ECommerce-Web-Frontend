@@ -7,17 +7,19 @@ import {
   increasItemQuantity,
 } from "../../actions/cartAction";
 import { Fragment } from "react";
-
+import { HiOutlineTrash as DeleteIcon } from "react-icons/hi";
+import MetaData from "../../utils/MetaData";
 const Cart = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { items: cartItems } = useSelector((state) => state.cartState);
 
   const checkOutFun = () => {
-    navigate('/login?redirect=shipping-details')
-  }
+    navigate("/login?redirect=shipping-details");
+  };
   return (
     <>
+    <MetaData title={"Cart"} />
       {cartItems.length === 0 ? (
         <div className="container container-fluid">
           <h1 className="mt-5">Cart is empty</h1>
@@ -53,7 +55,7 @@ const Cart = () => {
                       </div>
 
                       <div className="col-4 col-lg-3 mt-4 mt-lg-0">
-                        <div className="stockCounter d-inline">
+                        <div className="stockCounter d-inline text-nowrap">
                           <span
                             className="btn btn-danger minus"
                             onClick={() =>
@@ -70,7 +72,6 @@ const Cart = () => {
                             value={item.quantity}
                             readOnly
                           />
-
                           <span
                             className="btn btn-primary plus"
                             onClick={() =>
@@ -88,18 +89,18 @@ const Cart = () => {
                         </div>
                       </div>
 
-                      <div className="col-4 col-lg-1 mt-4 mt-lg-0">
-                        <i
-                          id="delete_cart_item"
-                          className="fa fa-trash btn btn-danger"
+                      <div className="col-4 col-lg-1 mt-4 mt-lg-0 flex ">
+                        <DeleteIcon
+                          size={25}
+                          className="text-red-700 mt-2 cursor-pointer"
                           onClick={() => dispatch(deleteItem(item._id))}
-                        ></i>
+                        />
                       </div>
                     </div>
+                    <hr />
                   </Fragment>
                 ))}
               </div>
-              <hr />
             </div>
 
             <div className="col-12 col-lg-3 my-4">
@@ -125,7 +126,11 @@ const Cart = () => {
                 </p>
 
                 <hr />
-                <button id="checkout_btn" className="btn btn-primary btn-block" onClick={checkOutFun}>
+                <button
+                  id="checkout_btn"
+                  className="btn btn-primary btn-block"
+                  onClick={checkOutFun}
+                >
                   Check out
                 </button>
               </div>

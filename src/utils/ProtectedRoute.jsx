@@ -12,7 +12,7 @@ export default function ProtectedRoute({ children }) {
         position: "bottom-center",
       });
   }, [isAuthenticated]);
-  
+
   if (isAuthenticated === false) {
     return <Navigate to="/login" />;
   }

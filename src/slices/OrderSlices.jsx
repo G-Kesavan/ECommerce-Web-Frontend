@@ -80,7 +80,7 @@ export const {
   getMyOrderRequest,
   getSingleOrderFail,
   getSingleOrderSuccess,
-  getSingleOrderRequest
+  getSingleOrderRequest,
 } = actions;
 
 export default reducer;

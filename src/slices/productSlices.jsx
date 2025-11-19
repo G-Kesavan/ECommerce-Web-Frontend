@@ -31,7 +31,7 @@ const productSlice = createSlice({
         loading: true,
       };
     },
-    createReviweSuccess(state,action) {
+    createReviweSuccess(state, action) {
       return {
         ...state,
         loading: false,
@@ -44,14 +44,13 @@ const productSlice = createSlice({
         error: action.payload,
       };
     },
-    clearMessage(state,) {
+    clearMessage(state) {
       return {
         ...state,
         loading: false,
         message: undefined,
       };
     },
-
   },
 });
 
@@ -64,7 +63,7 @@ export const {
   createReviweFail,
   createReviweRequest,
   createReviweSuccess,
-  clearMessage
+  clearMessage,
 } = actions;
 
 export default reducer;

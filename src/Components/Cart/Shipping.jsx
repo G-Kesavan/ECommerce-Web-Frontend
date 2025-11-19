@@ -1,20 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { saveShippingInformation } from "../../actions/cartAction";
 import { countries } from "countries-list";
 import { useNavigate } from "react-router-dom";
 import CartStepper from "./CartStepper";
+import MetaData from "../../utils/MetaData";
 
 const Shipping = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { shippingInfo } = useSelector((state) => state.cartState);
-  const [address, setAddress] = useState(shippingInfo.address || "");
-  const [state, setState] = useState(shippingInfo.state || "");
-  const [postCode, setPostCode] = useState(shippingInfo.postCode || "");
-  const [city, setCity] = useState(shippingInfo.city || "");
-  const [country, setCountry] = useState(shippingInfo.country || "");
-  const [phonNo, setPhonNo] = useState(shippingInfo.phonNo || "");
+  const [address, setAddress] = useState("");
+  const [state, setState] = useState("");
+  const [postCode, setPostCode] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+  const [phonNo, setPhonNo] = useState("");
   const countryList = Object.values(countries);
 
   const onSubmit = (e) => {
@@ -24,8 +25,21 @@ const Shipping = () => {
     );
     navigate("/confirm-order");
   };
+
+  useEffect(() => {
+    if (shippingInfo) {
+      setAddress(shippingInfo.address);
+      setCity(shippingInfo.city);
+      setState(shippingInfo.state);
+      setPostCode(shippingInfo.postCode);
+      setPhonNo(shippingInfo.phonNo);
+      setCountry(shippingInfo.country);
+    }
+  }, [shippingInfo]);
+
   return (
     <>
+      <MetaData title={"Shipping"} />
       <CartStepper activeSteps={1} />
       <div className="row wrapper">
         <div className="col-10 col-lg-5">
@@ -95,7 +109,7 @@ const Shipping = () => {
                 onChange={(e) => {
                   setCountry(e.target.value);
                 }}
-                defaultValue={country}
+                value={country}
                 required
               >
                 <option value="">Select option</option>

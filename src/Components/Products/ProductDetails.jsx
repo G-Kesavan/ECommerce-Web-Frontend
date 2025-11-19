@@ -16,7 +16,7 @@ const ProductDetials = () => {
   const [comment, setComment] = useState("");
   const dispatch = useDispatch();
   const { id } = useParams();
-  const {isAuthenticated} = useSelector((state)=>state.authState)
+  const { isAuthenticated } = useSelector((state) => state.authState);
   const { product, loading } = useSelector((state) => state.productState);
   const [quantity, setQuantity] = useState(1);
 
@@ -152,16 +152,22 @@ const ProductDetials = () => {
                       Sold by: <strong>{product.seller}</strong>
                     </p>
 
-                    {isAuthenticated?<button
-                      id="review_btn"
-                      type="button"
-                      className="btn btn-primary mt-4"
-                      data-toggle="modal"
-                      data-target="#ratingModal"
-                      onClick={() => setisOpen(true)}
-                    >
-                      Submit Your Review
-                    </button>:<div className="w-full p-2 bg-amber-300 m-[10px_10px_10px_0px] rounded-2xl place-content-center flex">Login to submit Review</div>}
+                    {isAuthenticated ? (
+                      <button
+                        id="review_btn"
+                        type="button"
+                        className="btn btn-primary mt-4"
+                        data-toggle="modal"
+                        data-target="#ratingModal"
+                        onClick={() => setisOpen(true)}
+                      >
+                        Submit Your Review
+                      </button>
+                    ) : (
+                      <div className="w-full p-2 bg-amber-300 m-[10px_10px_10px_0px] rounded-2xl place-content-center flex">
+                        Login to submit Review
+                      </div>
+                    )}
                     <Modal
                       open={isOpen}
                       className="w-full flex items-center justify-center"

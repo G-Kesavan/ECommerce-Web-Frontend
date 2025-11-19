@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getMyOrder } from "../../actions/orderAction";
+import MetaData from "../../utils/MetaData";
 
 const MyOrder = () => {
   const dispatch = useDispatch();
@@ -60,18 +61,18 @@ const MyOrder = () => {
   ];
   const rows = [];
   orders.map((order, i) => {
-
     rows.push({
       no: i + 1,
       id: order._id,
       quantity: order.orderItems.reduce((acc, item) => acc + item.quantity, 0),
       amount: order.totalPrice.toFixed(2),
       status: order.orderStatus,
-      date: new Date(order.createAt).toLocaleDateString()
+      date: new Date(order.createAt).toLocaleDateString(),
     });
   });
   return (
     <Box className="flex m-5">
+      <MetaData title={"My Orders"} />
       <DataGrid
         sx={{ width: "fit-content" }}
         rows={rows}

@@ -1,11 +1,12 @@
 import React, { Fragment, useEffect } from "react";
 import { isShippingValid } from "../../utils/IsShippingValied";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { createOrder } from "../../actions/orderAction";
 import CartStepper from "./CartStepper";
 import { deleteCartAllItem } from "../../slices/cartSlices";
+import MetaData from "../../utils/MetaData";
 const razorpay_key_id = import.meta.env.VITE_RAZORPAY_KEY_ID;
 
 const ConfirmOrder = () => {
@@ -61,7 +62,7 @@ const ConfirmOrder = () => {
               paymentInfo
             )
           );
-          dispatch(deleteCartAllItem())
+          dispatch(deleteCartAllItem());
           navigate("/payment-success");
         }
       },
@@ -79,7 +80,8 @@ const ConfirmOrder = () => {
 
   return (
     <>
-      <CartStepper activeStep={2} handlePayment={handlePayment}/>
+      <MetaData title={"Confirm Order"} />
+      <CartStepper activeStep={2} handlePayment={handlePayment} />
       <div className="container container-fluid">
         <div className="row d-flex justify-content-between">
           <div className="col-12 col-lg-8 mt-5 order-confirm">
@@ -98,25 +100,24 @@ const ConfirmOrder = () => {
             <hr />
             <h4 className="mt-4">Your Cart Items:</h4>
 
-            <hr />
+            <br />
             <div className="cart-item my-1">
               <div className="row">
                 {items.map((item) => (
                   <Fragment key={item._id}>
                     <div className="col-4 col-lg-2">
                       <img
+                        className="w-[120px] h-[100px] object-fill object-center"
                         src={item.image}
                         alt={item.name}
-                        height="45"
-                        width="65"
                       />
                     </div>
 
                     <div className="col-5 col-lg-6">
-                      <a href="#">
-                        {item.name}
+                      <Link to={`/product/${item._id}`}>
+                        {item.name + " "}
                         /with No Cost EMI/Additional Exchange Offers
-                      </a>
+                      </Link>
                     </div>
 
                     <div className="col-4 col-lg-4 mt-4 mt-lg-0">
@@ -125,11 +126,11 @@ const ConfirmOrder = () => {
                         <b>{"₹" + item.price * item.quantity}</b>
                       </p>
                     </div>
+                    <hr className="w-full" />
                   </Fragment>
                 ))}
               </div>
             </div>
-            <hr />
           </div>
 
           <div className="col-12 col-lg-3 my-4">

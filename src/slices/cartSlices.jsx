@@ -17,8 +17,8 @@ const cartSlice = createSlice({
       localStorage.setItem("shippingInfo", JSON.stringify(shippingInfo));
       return {
         ...state,
-        loading:false,
-        shippingInfo:shippingInfo
+        loading: false,
+        shippingInfo: shippingInfo,
       };
     },
     addCartItemRequest(state) {
@@ -99,7 +99,7 @@ export const {
   decreaseQuantity,
   deleteCartItem,
   saveShippingInfo,
-  deleteCartAllItem
+  deleteCartAllItem,
 } = actions;
 
 export default reducer;

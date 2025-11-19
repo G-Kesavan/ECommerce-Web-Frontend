@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import CartStepper from "./CartStepper";
+import MetaData from "../../utils/MetaData";
 
 const PaymentSuccess = () => {
   return (
     <>
+      <MetaData title={"Payment success"} />
       <CartStepper activeStep={3} />
       <div class="container container-fluid">
         <div class="row justify-content-center">
@@ -23,7 +25,7 @@ const PaymentSuccess = () => {
         </div>
       </div>
     </>
-  ); 
+  );
 };
 
 export default PaymentSuccess;

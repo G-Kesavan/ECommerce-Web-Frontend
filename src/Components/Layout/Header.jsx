@@ -1,5 +1,5 @@
 import SearchBar from "./SearchBar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/userAction";
 import { Dropdown, Menu, MenuButton, MenuItem } from "@mui/joy";
@@ -10,6 +10,7 @@ const Header = () => {
   const { user, isAuthenticated } = useSelector((state) => state.authState);
   const { items: cartItem } = useSelector((state) => state.cartState);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const logoutFun = () => {
     dispatch(logout());
   };
@@ -37,7 +38,7 @@ const Header = () => {
           <Button sx={{ bgcolor: "#fa9c23", fontWeight: "500" }}>
             <Link
               className="text-white"
-              style={{ textDecoration: "none",padding:"6px 10px" }}
+              style={{ textDecoration: "none", padding: "6px 10px" }}
               to={`/login`}
             >
               login
@@ -65,16 +66,17 @@ const Header = () => {
                   {user.name.slice(0, 9)}
                 </Typography>
               </MenuButton>
-              <Menu>
-                <MenuItem>
-                  <Button>
-                    <Link
-                      style={{ color: "#fa9c23", textDecoration: "none" }}
-                      to={`/profile`}
-                    >
-                      Profile
-                    </Link>
-                  </Button>
+              <Menu className="pl-2 pr-2">
+                {user.role === "admin" && (
+                  <MenuItem onClick={() => navigate("/admin/dashboard")}>
+                    Dashboard
+                  </MenuItem>
+                )}
+                <MenuItem onClick={() => navigate("/profile")}>
+                  Profile
+                </MenuItem>
+                <MenuItem onClick={() => navigate("/my-order")}>
+                  Orders
                 </MenuItem>
                 <MenuItem>
                   <Button

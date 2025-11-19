@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { getSingleOrder } from "../../actions/orderAction";
+import MetaData from "../../utils/MetaData";
 
 const OrderDetails = () => {
   const { order } = useSelector((state) => state.ordersState);
@@ -13,6 +14,7 @@ const OrderDetails = () => {
 
   return (
     <div className="container container-fluid">
+      <MetaData title={"Order details"} />
       <div className="row d-flex justify-content-between">
         {order ? (
           <div className="col-12 col-lg-8 mt-5 order-details">

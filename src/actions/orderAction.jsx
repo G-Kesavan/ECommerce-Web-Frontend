@@ -48,7 +48,7 @@ export const getMyOrder = () => async (dispatch) => {
   }
 };
 
-export const getSingleOrder = id => async (dispatch) => {
+export const getSingleOrder = (id) => async (dispatch) => {
   try {
     dispatch(getSingleOrderRequest());
     const { data } = await axios.get(`/api/order/get-single-order/${id}`);
@@ -57,4 +57,3 @@ export const getSingleOrder = id => async (dispatch) => {
     dispatch(getSingleOrderFail(error.response.data.message));
   }
 };
-

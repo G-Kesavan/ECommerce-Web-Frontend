@@ -29,6 +29,16 @@ import PaymentSuccess from "./Components/Cart/PaymentSuccess";
 import OrderDetails from "./Components/Order/OrderDetails";
 import MyOrder from "./Components/Order/MyOrder";
 import { clearProductMessage } from "./actions/productsAction";
+import Dashboard from "./Components/Admin/Dashboard";
+import AdminRoute from "./utils/AdminRoute";
+import AllProducts from "./Components/Admin/AllProducts";
+import AllOrders from "./Components/Admin/AllOrders";
+import CreateProduct from "./Components/Admin/CreateProduct";
+import AllUsers from "./Components/Admin/AllUsers";
+import Reviews from "./Components/Admin/Reviews";
+import UpdateOrder from "./Components/Admin/UpdateOrder";
+import UpdateProduct from "./Components/Admin/UpdateProduct";
+import UpdateUser from "./Components/Admin/UpdateUser";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -56,87 +66,175 @@ const App = () => {
 
   return (
     <Router>
-      <div>
-        <HelmetProvider>
-          <Header />
-          <ToastContainer theme="dark" />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/product/:id" element={<ProductDetials />} />
-            <Route path="/search/:keyword" element={<SearchProduct />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/forget-password" element={<ForgotPassword />} />
-            <Route path="/password-reset/:token" element={<ResetPassword />} />
-            <Route
-              path="/profile"
-              element={
-                <ProtectedRoute>
-                  <Profile />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/update-profile"
-              element={
-                <ProtectedRoute>
-                  <UpdateProfile />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/shipping-details"
-              element={
-                <ProtectedRoute>
-                  <Shipping />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/confirm-order"
-              element={
-                <ProtectedRoute>
-                  <ConfirmOrder />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/payment-success"
-              element={
-                <ProtectedRoute>
-                  <PaymentSuccess />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/my-order"
-              element={
-                <ProtectedRoute>
-                  <MyOrder />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/order-details/:orderId"
-              element={
-                <ProtectedRoute>
-                  <OrderDetails />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/change-password"
-              element={
-                <ProtectedRoute>
-                  <ChangePassword />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
-          <Footer />
-        </HelmetProvider>
-      </div>
+      <HelmetProvider>
+        <Header />
+        <ToastContainer theme="dark" />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/product/:id" element={<ProductDetials />} />
+          <Route path="/search/:keyword" element={<SearchProduct />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/forget-password" element={<ForgotPassword />} />
+          <Route path="/password-reset/:token" element={<ResetPassword />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/dashboard"
+            element={
+              <ProtectedRoute>
+                <AdminRoute>
+                  <Dashboard />
+                </AdminRoute>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/products"
+            element={
+              <ProtectedRoute>
+                <AdminRoute>
+                  <AllProducts />
+                </AdminRoute>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/Orders"
+            element={
+              <ProtectedRoute>
+                <AdminRoute>
+                  <AllOrders />
+                </AdminRoute>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/Users"
+            element={
+              <ProtectedRoute>
+                <AdminRoute>
+                  <AllUsers />
+                </AdminRoute>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/create-product"
+            element={
+              <ProtectedRoute>
+                <AdminRoute>
+                  <CreateProduct />
+                </AdminRoute>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/update-orders/:orderId"
+            element={
+              <ProtectedRoute>
+                <AdminRoute>
+                  <UpdateOrder />
+                </AdminRoute>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/update-product/:productId"
+            element={
+              <ProtectedRoute>
+                <AdminRoute>
+                  <UpdateProduct />
+                </AdminRoute>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/update-user/:userId"
+            element={
+              <ProtectedRoute>
+                <AdminRoute>
+                  <UpdateUser />
+                </AdminRoute>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/reviews"
+            element={
+              <ProtectedRoute>
+                <AdminRoute>
+                  <Reviews />
+                </AdminRoute>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/update-profile"
+            element={
+              <ProtectedRoute>
+                <UpdateProfile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/shipping-details"
+            element={
+              <ProtectedRoute>
+                <Shipping />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/confirm-order"
+            element={
+              <ProtectedRoute>
+                <ConfirmOrder />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/payment-success"
+            element={
+              <ProtectedRoute>
+                <PaymentSuccess />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/my-order"
+            element={
+              <ProtectedRoute>
+                <MyOrder />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/order-details/:orderId"
+            element={
+              <ProtectedRoute>
+                <OrderDetails />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/change-password"
+            element={
+              <ProtectedRoute>
+                <ChangePassword />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+        <Footer />
+      </HelmetProvider>
     </Router>
   );
 };
