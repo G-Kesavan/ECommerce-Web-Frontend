@@ -1,4 +1,6 @@
 import axios from "axios";
+const backend_url = import.meta.env.VITE_BACKEND_URL;
+axios.defaults.withCredentials = true;
 import {
   createOrderFail,
   createOrderRequest,
@@ -24,7 +26,7 @@ export const createOrder =
   async (dispatch) => {
     try {
       dispatch(createOrderRequest());
-      const { data } = await axios.post(`/api/order/new-order`, {
+      const { data } = await axios.post(backend_url+`/api/order/new-order`, {
         shippingInfo,
         orderItems,
         itemsPrice,
@@ -41,7 +43,7 @@ export const createOrder =
 export const getMyOrder = () => async (dispatch) => {
   try {
     dispatch(getMyOrderRequest());
-    const { data } = await axios.get(`/api/order/my-order`);
+    const { data } = await axios.get(backend_url+`/api/order/my-order`);
     dispatch(getMyOrderSuccess(data));
   } catch (error) {
     dispatch(getMyOrderFail(error.response.data.message));
@@ -51,7 +53,7 @@ export const getMyOrder = () => async (dispatch) => {
 export const getSingleOrder = (id) => async (dispatch) => {
   try {
     dispatch(getSingleOrderRequest());
-    const { data } = await axios.get(`/api/order/get-single-order/${id}`);
+    const { data } = await axios.get(backend_url+`/api/order/get-single-order/${id}`);
     dispatch(getSingleOrderSuccess(data));
   } catch (error) {
     dispatch(getSingleOrderFail(error.response.data.message));

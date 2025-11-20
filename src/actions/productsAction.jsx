@@ -1,4 +1,6 @@
 import axios from "axios";
+const backend_url = import.meta.env.VITE_BACKEND_URL;
+axios.defaults.withCredentials = true;
 import {
   productsFail,
   productsRequest,
@@ -31,7 +33,7 @@ export const getProducts =
       if (rating) {
         url += `&ratings[gte]=${rating}`;
       }
-      const { data } = await axios.get(url);
+      const { data } = await axios.get(backend_url+url);
       dispatch(productsSuccess(data));
     } catch (error) {
       dispatch(productsFail(error.response.data.message));
@@ -41,7 +43,7 @@ export const getProducts =
 export const getProduct = (id) => async (dispatch) => {
   try {
     dispatch(productRequest());
-    const { data } = await axios.get(`/api/products/product/${id}`);
+    const { data } = await axios.get(backend_url+`/api/products/product/${id}`);
     dispatch(productSuccess(data));
   } catch (error) {
     dispatch(productFail(error.response.data.message));
@@ -52,7 +54,7 @@ export const createReviwe =
   (productId, rating, comment) => async (dispatch) => {
     try {
       dispatch(createReviweRequest());
-      const { data } = await axios.put(`/api/products/review`, {
+      const { data } = await axios.put(backend_url+`/api/products/review`, {
         productId,
         rating,
         comment,

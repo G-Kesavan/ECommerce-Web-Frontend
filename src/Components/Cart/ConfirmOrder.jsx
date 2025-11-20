@@ -8,6 +8,8 @@ import CartStepper from "./CartStepper";
 import { deleteCartAllItem } from "../../slices/cartSlices";
 import MetaData from "../../utils/MetaData";
 const razorpay_key_id = import.meta.env.VITE_RAZORPAY_KEY_ID;
+const backend_url = import.meta.env.VITE_BACKEND_URL;
+axios.defaults.withCredentials = true;
 
 const ConfirmOrder = () => {
   const dispatch = useDispatch();
@@ -26,7 +28,7 @@ const ConfirmOrder = () => {
   });
 
   const handlePayment = async () => {
-    const { data: order } = await axios.post("/api/payment/create-order", {
+    const { data: order } = await axios.post(backend_url+"/api/payment/create-order", {
       amount: Math.round(totalPrice),
     });
 
@@ -39,7 +41,7 @@ const ConfirmOrder = () => {
       image: "/images/logo.png",
       order_id: order.id,
       handler: async function (response) {
-        const { data } = await axios.post("/api/payment/verify", {
+        const { data } = await axios.post(backend_url+"/api/payment/verify", {
           razorpay_order_id: response.razorpay_order_id,
           razorpay_payment_id: response.razorpay_payment_id,
           razorpay_signature: response.razorpay_signature,

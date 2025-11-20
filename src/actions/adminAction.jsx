@@ -1,4 +1,6 @@
 import axios from "axios";
+const backend_url = import.meta.env.VITE_BACKEND_URL;
+axios.defaults.withCredentials = true;
 import {
   createNewFail,
   createNewRequest,
@@ -41,7 +43,7 @@ import {
 export const getAllProducts = () => async (dispatch) => {
   try {
     dispatch(getAllProductsRequest());
-    const { data } = await axios.get("/api/products/admin/get-all-product");
+    const { data } = await axios.get(backend_url+"/api/products/admin/get-all-product");
     dispatch(getAllProductsSuccess(data));
   } catch (error) {
     dispatch(getAllProductsFail(error.response.data.message));
@@ -51,7 +53,7 @@ export const getAllProducts = () => async (dispatch) => {
 export const getAllUsers = () => async (dispatch) => {
   try {
     dispatch(getAllUsersRequest());
-    const { data } = await axios.get("/api/auth/admin/get-all-users");
+    const { data } = await axios.get(backend_url+"/api/auth/admin/get-all-users");
     dispatch(getAllUsersSuccess(data));
   } catch (error) {
     dispatch(getAllUsersFail(error.response.data.message));
@@ -61,7 +63,7 @@ export const getAllUsers = () => async (dispatch) => {
 export const getAllOrders = () => async (dispatch) => {
   try {
     dispatch(getAllOrdersRequest());
-    const { data } = await axios.get("/api/order/admin/all-orders");
+    const { data } = await axios.get(backend_url+"/api/order/admin/all-orders");
     dispatch(getAllOrdersSuccess(data));
   } catch (error) {
     dispatch(getAllOrdersFail(error.response.data.message));
@@ -77,7 +79,7 @@ export const createProduct = (productData) => async (dispatch) => {
     };
     dispatch(createNewRequest());
     const { data } = await axios.post(
-      "/api/products/admin/create-product",
+      backend_url+"/api/products/admin/create-product",
       productData,
       config
     );
@@ -96,7 +98,7 @@ export const updateProduct = (productId, productData) => async (dispatch) => {
     };
     dispatch(updateProductRequest());
     const { data } = await axios.put(
-      `/api/products/admin/product/${productId}`,
+      backend_url+`/api/products/admin/product/${productId}`,
       productData,
       config
     );
@@ -110,7 +112,7 @@ export const deleteProduct = (productId) => async (dispatch) => {
   try {
     dispatch(deleteProductRequest());
     const { data } = await axios.delete(
-      `/api/products/admin/product/${productId}`
+      backend_url+`/api/products/admin/product/${productId}`
     );
     dispatch(deleteProductSuccess(data));
   } catch (error) {
@@ -122,7 +124,7 @@ export const deleteOrder = (orderId) => async (dispatch) => {
   try {
     dispatch(deleteOrderRequest());
     const { data } = await axios.delete(
-      `/api/order/admin/delete-order/${orderId}`
+      backend_url+`/api/order/admin/delete-order/${orderId}`
     );
     dispatch(deleteOrderSuccess(data));
   } catch (error) {
@@ -133,7 +135,7 @@ export const deleteOrder = (orderId) => async (dispatch) => {
 export const getSingleUser = (userId) => async (dispatch) => {
   try {
     dispatch(getSingleUserRequest());
-    const { data } = await axios.get(`/api/auth/admin/user/${userId}`);
+    const { data } = await axios.get(backend_url+`/api/auth/admin/user/${userId}`);
     dispatch(getSingleUserSuccess(data));
   } catch (error) {
     dispatch(getSingleUserFail(error.response.data.message));
@@ -143,7 +145,7 @@ export const getSingleUser = (userId) => async (dispatch) => {
 export const deleteSingleUser = (userId) => async (dispatch) => {
   try {
     dispatch(getSingleUserRequest());
-    const { data } = await axios.delete(`/api/auth/admin/user/${userId}`);
+    const { data } = await axios.delete(backend_url+`/api/auth/admin/user/${userId}`);
     dispatch(getSingleUserSuccess(data));
   } catch (error) {
     dispatch(getSingleUserFail(error.response.data.message));
@@ -154,7 +156,7 @@ export const updateSingleUser = (userId, userData) => async (dispatch) => {
   try {
     dispatch(updateSingleUserRequest());
     const { data } = await axios.put(
-      `/api/auth/admin/user/${userId}`,
+      backend_url+`/api/auth/admin/user/${userId}`,
       userData
     );
     dispatch(updateSingleUserSuccess(data));
@@ -167,7 +169,7 @@ export const updateOrder = (orderId, orderStatus) => async (dispatch) => {
   try {
     dispatch(updateOrderRequest());
     const { data } = await axios.put(
-      `/api/order/admin/update-order/${orderId}`,
+      backend_url+`/api/order/admin/update-order/${orderId}`,
       { orderStatus }
     );
     dispatch(updateOrderSuccess(data));
@@ -180,7 +182,7 @@ export const getReviews = (productId) => async (dispatch) => {
   try {
     dispatch(getReviewsRequest());
     const { data } = await axios.get(
-      `/api/products/admin/reviews?productId=${productId}`
+      backend_url+`/api/products/admin/reviews?productId=${productId}`
     );
     dispatch(getReviewsSuccess(data));
   } catch (error) {
@@ -192,7 +194,7 @@ export const deleteReviews = (productId, reviewId) => async (dispatch) => {
   try {
     dispatch(deleteReviewRequest());
     const { data } = await axios.delete(
-      `/api/products/admin/reviews?productId=${productId}&reviewId=${reviewId}`
+      backend_url+`/api/products/admin/reviews?productId=${productId}&reviewId=${reviewId}`
     );
     dispatch(deleteReviewSuccess(data));
   } catch (error) {

@@ -25,12 +25,14 @@ import {
   registerSuccess,
   resetPasswordRequest,
 } from "../slices/authSlices";
+const backend_url = import.meta.env.VITE_BACKEND_URL;
 import axios from "axios";
+axios.defaults.withCredentials = true;
 
 export const login = (email, password) => async (dispatch) => {
   try {
     dispatch(loginRequest());
-    const { data } = await axios.post("/api/auth/login", { email, password });
+    const { data } = await axios.post(backend_url+"/api/auth/login", { email, password });
     dispatch(loginSuccess(data));
   } catch (error) {
     dispatch(loginFail(error.response.data.message));
@@ -41,10 +43,10 @@ export const passwordReset =
   (password, confirmPassword, token) => async (dispatch) => {
     try {
       dispatch(resetPasswordRequest());
-      const { data } = await axios.post(`/api/auth/password-reset/${token}`, {
+      const { data } = await axios.post(backend_url+`/api/auth/password-reset/${token}`, {
         password,
         confirmPassword,
-      });
+      },);
       dispatch(loginSuccess(data));
     } catch (error) {
       dispatch(loginFail(error.response.data.message));
@@ -54,7 +56,7 @@ export const passwordReset =
 export const forgotEmail = (email) => async (dispatch) => {
   try {
     dispatch(forgotEmailRequest());
-    const { data } = await axios.post("/api/auth/password-forgot", { email });
+    const { data } = await axios.post(backend_url+"/api/auth/password-forgot", { email });
     dispatch(forgotEmailSuccess(data));
   } catch (error) {
     dispatch(forgotEmailFail(error.response.data.message));
@@ -69,7 +71,7 @@ export const register = (userData) => async (dispatch) => {
         "Content-type": "multipart/form-data",
       },
     };
-    const { data } = await axios.post("/api/auth/register", userData, config);
+    const { data } = await axios.post(backend_url+"/api/auth/register", userData, config);
     dispatch(registerSuccess(data));
   } catch (error) {
     dispatch(registerFail(error.response.data.message));
@@ -85,7 +87,7 @@ export const editProfile = (userData) => async (dispatch) => {
       },
     };
     const { data } = await axios.put(
-      "/api/auth/profile-update",
+      backend_url+"/api/auth/profile-update",
       userData,
       config
     );
@@ -99,7 +101,7 @@ export const passwordChange =
   (oldPassword, newPassword) => async (dispatch) => {
     try {
       dispatch(passwordChangeRequest());
-      const { data } = await axios.put("/api/auth/password-change", {
+      const { data } = await axios.put(backend_url+"/api/auth/password-change", {
         oldPassword,
         password: newPassword,
       });
@@ -112,7 +114,7 @@ export const passwordChange =
 export const loadUserData = () => async (dispatch) => {
   try {
     dispatch(loadUserRequest());
-    const { data } = await axios.get("/api/auth/my-profile");
+    const { data } = await axios.get(backend_url + "/api/auth/my-profile");
     dispatch(loadUserSuccess(data));
   } catch (error) {
     dispatch(loadUserFail(error.response.data.message));
@@ -122,7 +124,7 @@ export const loadUserData = () => async (dispatch) => {
 export const logout = () => async (dispatch) => {
   try {
     dispatch(logoutRequest());
-    const { data } = await axios.get("/api/auth/logout");
+    const { data } = await axios.get(backend_url+"/api/auth/logout");
     dispatch(logoutSuccess(data));
   } catch (error) {
     dispatch(logoutFail(error.response.data.message));

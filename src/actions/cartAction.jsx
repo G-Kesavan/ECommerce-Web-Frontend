@@ -1,4 +1,6 @@
 import axios from "axios";
+const backend_url = import.meta.env.VITE_BACKEND_URL;
+axios.defaults.withCredentials = true;
 import {
   addCartItemFail,
   addCartItemRequest,
@@ -13,7 +15,7 @@ import {
 export const addCartItems = (id, quantity) => async (dispatch) => {
   try {
     dispatch(addCartItemRequest());
-    const { data } = await axios.get(`/api/products/product/${id}`);
+    const { data } = await axios.get(backend_url+`/api/products/product/${id}`);
     dispatch(
       addCartItemSuccess({
         _id: data.product._id,
