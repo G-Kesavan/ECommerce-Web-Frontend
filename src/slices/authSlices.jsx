@@ -74,7 +74,6 @@ const authSlice = createSlice({
     loadUserRequest(state) {
       return {
         ...state,
-        loading: false,
         isAuthenticated: undefined,
       };
     },
