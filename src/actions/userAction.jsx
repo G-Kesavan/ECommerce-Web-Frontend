@@ -35,7 +35,7 @@ export const login = (email, password) => async (dispatch) => {
     const { data } = await axios.post(backend_url + "/api/auth/login", {
       email,
       password,
-    });
+    },{ withCredentials: true });
     dispatch(loginSuccess(data));
   } catch (error) {
     dispatch(loginFail(error.response.data.message));
@@ -130,9 +130,7 @@ export const passwordChange =
 export const loadUserData = () => async (dispatch) => {
   try {
     dispatch(loadUserRequest());
-    const { data } = await axios.get(backend_url + "/api/auth/my-profile", {
-      withCredentials: true,
-    });
+    const { data } = await axios.get(backend_url + "/api/auth/my-profile",{ withCredentials: true });
     dispatch(loadUserSuccess(data));
   } catch (error) {
     dispatch(loadUserFail(error.response.data.message));
