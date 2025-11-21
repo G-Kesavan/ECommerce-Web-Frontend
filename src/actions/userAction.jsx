@@ -130,7 +130,7 @@ export const passwordChange =
 export const loadUserData = () => async (dispatch) => {
   try {
     dispatch(loadUserRequest());
-    const hasToken = document.cookie.includes("token=");
+    const hasToken = await document.cookie.includes("token=");
     if (!hasToken) {
       return dispatch(loadUserFail("Not logged in"));
     }
