@@ -130,7 +130,7 @@ export const passwordChange =
 export const loadUserData = () => async (dispatch) => {
   try {
     dispatch(loadUserRequest());
-    const { data } = await axios.get(backend_url + "/api/auth/my-profile");
+    const { data } = await axios.get(backend_url + "/api/auth/my-profile",{withCredentials:true});
     dispatch(loadUserSuccess(data));
   } catch (error) {
     dispatch(loadUserFail(error.response.data.message));
