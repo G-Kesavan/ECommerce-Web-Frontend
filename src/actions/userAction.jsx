@@ -130,10 +130,6 @@ export const passwordChange =
 export const loadUserData = () => async (dispatch) => {
   try {
     dispatch(loadUserRequest());
-    const hasToken = await document.cookie.includes("token=");
-    if (!hasToken) {
-      return dispatch(loadUserFail("Not logged in"));
-    }
     const { data } = await axios.get(backend_url + "/api/auth/my-profile");
     dispatch(loadUserSuccess(data));
   } catch (error) {
