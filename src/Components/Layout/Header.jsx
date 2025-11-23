@@ -20,14 +20,14 @@ const Header = () => {
           <Link to={`/`} className="flex items-center justify-start" >
             <img
               width="120px"
-              height=""
+              height="50px"
               src="/images/logo.png"
               alt="logo"
             />
           </Link>
       </div>
 
-      <div className="col-end-3 col-start-1 md:col-start-2 md:col-end-3 mt-3 mt-md-2 items-center justify-center">
+      <div className="col-start-1 col-end-3 row-start-2 md:col-start-2 md:col-end-3 md:row-start-1 mt-3 mt-md-2 items-center justify-center">
         <SearchBar />
       </div>
 
