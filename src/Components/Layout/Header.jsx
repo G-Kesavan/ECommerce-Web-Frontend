@@ -15,20 +15,19 @@ const Header = () => {
     dispatch(logout());
   };
   return (
-    <nav style={{display:'grid'}} className="grid-cols-[2] grid-rows-[2] md:grid-cols-[3] md:grid-rows-[1]" >
+    <nav style={{display:'grid'}} className="grid-cols-2 grid-rows-2 md:grid-cols-3 md:grid-rows-1" >
       <div className="col-start-1 col-end-2">
           <Link to={`/`} className="flex items-center justify-start" >
             <img
               width="120px"
-              height="50px"
+              height=""
               src="/images/logo.png"
-              className="min-h-[50px]"
               alt="logo"
             />
           </Link>
       </div>
 
-      <div className="col-start-1 col-end-3 row-start-2 md:col-start-2 md:col-end-3 md:row-start-1 mt-3 mt-md-2 items-center justify-center">
+      <div className="col-start-1 col-end-3  md:col-start-2 md:col-end-3 mt-3 mt-md-2 items-center justify-center">
         <SearchBar />
       </div>
 
