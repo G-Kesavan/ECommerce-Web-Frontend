@@ -79,7 +79,7 @@ const SearchProduct = () => {
               onMouseUp={() => {
                 setSendPrice(price);
               }}
-              className="col-2 w-[auto] m-2"
+              className="col-2 w-[auto] md:w-full m-2"
             >
               <h5>Price:</h5>
               <p>{`${price[0]}₹ to ${price[1]}₹`}</p>
