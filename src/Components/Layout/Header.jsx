@@ -22,6 +22,7 @@ const Header = () => {
               width="120px"
               height="50px"
               src="/images/logo.png"
+              className="min-h-[50px]"
               alt="logo"
             />
           </Link>
