@@ -15,25 +15,23 @@ const Header = () => {
     dispatch(logout());
   };
   return (
-    <nav className="navbar">
-      <div className="col-12 col-md-3">
-        <div className="navbar-brand">
-          <Link to={`/`}>
+    <nav style={{display:'grid'}} className="grid-cols-[2] grid-rows-[2] md:grid-cols-[3] md:grid-rows-[1]" >
+      <div className="col-start-1 col-end-2">
+          <Link to={`/`} className="flex items-center justify-start" >
             <img
-              width="160px"
+              width="120px"
               height="10px"
-              src="/images/logo.png"
+              src="/images/logo_use.png"
               alt="logo"
             />
           </Link>
-        </div>
       </div>
 
-      <div className="col-12 col-md-5 mt-2 mt-md-0">
+      <div className="col-end-3 col-start-1 md:col-start-2 md:col-end-3 mt-3 mt-md-2 items-center justify-center">
         <SearchBar />
       </div>
 
-      <div className="col-12 col-md-4 mt-4 mt-md-0 text-center items-center justify-center flex">
+      <div className="row-start-1 col-start-2 col-end-3 md:col-start-3 md:col-end-4 text-center items-center justify-end flex">
         {!isAuthenticated ? (
           <Button sx={{ bgcolor: "#fa9c23", fontWeight: "500" }}>
             <Link

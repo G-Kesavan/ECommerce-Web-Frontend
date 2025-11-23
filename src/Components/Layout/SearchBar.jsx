@@ -23,8 +23,8 @@ const SearchBar = () => {
   }, [location]);
 
   return (
-    <form onSubmit={searchFun}>
-      <div className="input-group">
+    <form onSubmit={searchFun} className="items-center justify-center flex">
+      <div className="input-group m-0">
         <input
           type="text"
           id="search_field"
