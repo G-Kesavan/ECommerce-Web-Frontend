@@ -20,8 +20,8 @@ const Header = () => {
           <Link to={`/`} className="flex items-center justify-start" >
             <img
               width="120px"
-              height="10px"
-              src="/images/logo_use.png"
+              height=""
+              src="/images/logo.png"
               alt="logo"
             />
           </Link>

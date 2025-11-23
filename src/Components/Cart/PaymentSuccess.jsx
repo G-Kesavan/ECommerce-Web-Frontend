@@ -13,7 +13,7 @@ const PaymentSuccess = () => {
           <div class="col-6 mt-5 text-center">
             <img
               class="my-5 img-fluid d-block mx-auto bg-blue-950 p-2 rounded-2xl"
-              src="/images/logo_use.png"
+              src="/images/logo.png"
               alt="Order Success"
               width="200"
               height="200"
