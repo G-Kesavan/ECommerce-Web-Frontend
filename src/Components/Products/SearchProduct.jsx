@@ -7,9 +7,11 @@ import Loader from ".././Layout/Loader";
 import { toast } from "react-toastify";
 import Pagination from "react-js-pagination";
 import { useParams } from "react-router-dom";
-import { Rating, Slider, Typography } from "@mui/material";
+import { Button, Rating, Slider, Typography } from "@mui/material";
+import { FaFilter } from "react-icons/fa";
 
 const SearchProduct = () => {
+  const [isFilter, setIsFilter] = useState(false);
   const categorys = [
     "Electronics",
     "Mobile Phone",
@@ -71,15 +73,24 @@ const SearchProduct = () => {
       ) : (
         <>
           <MetaData title={"Search Product"} />
-          <h1 id="products_heading" className="ml-3 mr-3">
-            Search Products
+          <h1 id="products_heading" className="ml-3 mr-3 flex justify-between">
+            Search Products{" "}
+            <i
+              onClick={() => {
+                setIsFilter(true);
+              }}
+              className="md:hidden m-[auto_5px_auto_auto] border-2 p-1 rounded-sm text-[12px] flex justify-center items-center flex-col text-orange-500"
+            >
+              <FaFilter size={20} /> Filter
+            </i>
           </h1>
           <div id="products" className="mt-5 flex gap-4 w-[100%] p-3">
             <div
               onMouseUp={() => {
                 setSendPrice(price);
               }}
-              className="col-2 w-[auto] md:w-full m-2"
+              className={`${isFilter ? "col-12" : "col-2"} hidden md:block`}
+              style={isFilter ? { display: "block" } : null}
             >
               <h5>Price:</h5>
               <p>{`${price[0]}₹ to ${price[1]}₹`}</p>
@@ -127,8 +138,19 @@ const SearchProduct = () => {
                   </li>
                 ))}
               </ul>
+              <button
+                className="ml-auto flex p-1.5 rounded-lg bg-amber-600 text-white md:hidden"
+                onClick={() => {
+                  setIsFilter(false);
+                }}
+              >
+                Filler
+              </button>
             </div>
-            <div className="row col h-fit">
+            <div
+              className="row col h-fit ml-auto mr-auto"
+              style={isFilter ? { display: "none" } : null}
+            >
               {products &&
                 products.map((product) => (
                   <Product product={product} key={product._id} />
